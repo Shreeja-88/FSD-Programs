@@ -1,0 +1,79 @@
+<!--
+Write a JS program that demonstrates how to handle the events from different HTML elements. The program should:
+
+a) trigger an alert when the user clicks anywhere on the body of page
+b) change the text of a button when it is clicked and display a success msg below the button
+c) dynamically update a paragraph with the text entered in a text box as the user types
+d) display a password strength msg (weak. medium, or strong) based on the length of the entered password, updating the message as the user types.
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Event Handling</title>  
+</head>
+
+<body>
+	
+  <h2>JavaScript Event Handling</h2>
+
+  <button id="myButton">Click Me</button>
+  <p id="success"></p>
+
+  <label>Enter your name:</label><br><br>
+  <input type="text" id="nameBox" placeholder="Type something">
+  <p id="output"></p>
+
+  <label>Enter password:</label><br><br>
+  <input type="password" id="passwordBox" placeholder="Enter password">
+  <p id="strength"></p>
+  
+  <script>
+	
+	//1
+    document.body.addEventListener("click", function () {
+      alert("You clicked on the page!");
+    });
+
+	//2
+    document.getElementById("myButton").addEventListener("click", function (event) {
+
+      event.stopPropagation();
+
+      this.textContent = "Clicked!";
+      document.getElementById("success").textContent =
+        "Success!";
+    });
+	
+	//3
+    document.getElementById("nameBox").addEventListener("input", function () {
+      document.getElementById("output").textContent = this.value;
+
+    });
+	
+	//4
+	document.getElementById("passwordBox").addEventListener("input", function () {
+      let length = this.value.length;
+      let strength = document.getElementById("strength");
+
+      if (length === 0) {
+        strength.textContent = "";
+      }
+      else if (length < 6) {
+        strength.textContent = "Password strength: Weak";
+        strength.style.color = "red";
+      }
+      else if (length < 10) {
+        strength.textContent = "Password strength: Medium";
+        strength.style.color = "orange";
+      }
+      else {
+        strength.textContent = "Password strength: Strong";
+        strength.style.color = "green";
+      }
+
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!--write a JS program to create login stimulation program that prompts the user for a username and password using prompt. if the username and password match with pre-defined values, display a success message with alert. If not, use confirm to ask if they want to try again. if they agree, re-prompt for credentials.-->
+
+<html>
+<body>
+<script>
+let correctUsername = "admin";
+let correctPassword = "12345";
+
+let username;
+let password;
+
+   while (true) {
+       username = prompt("Enter username:");
+       password = prompt("Enter password:");
+       if (username === correctUsername && password === correctPassword) {
+           alert("Login Successful!");
+           break;
+       } else {
+           let tryAgain = confirm("Invalid username or password. Try again?");
+
+           if (!tryAgain) {
+               alert("Login cancelled.");
+               break;
+           }
+       }
+   }
+</script>
+</body>
+</html>

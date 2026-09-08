@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DOM Manipulation Example</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1 id="pageTitle">DOM Manipulation Example</h1>
+    <div id="myBox">
+        My Box
+    </div>
+
+    <h2>Unordered List</h2>
+    <ul>
+        <li>Apple</li>
+        <li>Banana</li>
+        <li>Mango</li>
+        <li>Orange</li>
+    </ul>
+
+    <h2>Ordered List</h2>
+    <ol>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>Python</li>
+    </ol>
+
+    <h2>Description List</h2>
+    <dl>
+        <dt>HTML</dt>
+        <dd>HyperText Markup Language</dd>
+
+        <dt>CSS</dt>
+        <dd>Cascading Style Sheets</dd>
+
+        <dt>JavaScript</dt>
+        <dd>A programming language for web pages</dd>
+    </dl>
+
+    <h2>Buttons</h2>
+
+    <button class="countBtn">Button 1</button>
+    <button class="countBtn">Button 2</button>
+    <button class="countBtn">Button 3</button>
+
+    <p class="p1">Paragraph 1: HTML is used to create the structure of a webpage.</p>
+    <p class="p2">Paragraph 2: CSS is used to style and design a webpage.</p>
+    <p class="p3">Paragraph 3: JavaScript is used to make webpages interactive.</p>
+    <p class="p4">Paragraph 4: DOM manipulation allows JavaScript to change HTML elements.</p>
+    <p class="p5">Paragraph 5: This page demonstrates different DOM manipulation techniques.</p>
+
+    <div class="special">
+        Original Text
+    </div>
+
+    <script>
+
+        document.getElementById("myBox").style.backgroundColor = "lightblue";
+
+        let items = document.getElementsByTagName("li");
+        for (let item of items) {
+            item.style.color = "blue";
+        }
+
+        let buttons = document.getElementsByClassName("countBtn");
+        for (let btn of buttons) {
+            let count = 0;
+            btn.addEventListener("click", function () {
+				count++;
+                btn.textContent = "Clicked! Count: " + count;
+
+            });
+        }
+
+        let paragraphs = document.getElementsByTagName("p");
+        for (let p of paragraphs) {
+            let currentSize = window.getComputedStyle(p).fontSize;
+            let size = parseFloat(currentSize);
+            p.style.fontSize = (size + 5) + "px";
+        }
+        document.querySelector(".special").textContent = "Changed Text";
+
+    </script>
+
+</body>
+</html>

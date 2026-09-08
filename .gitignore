@@ -1,0 +1,72 @@
+# Dependencies
+
+node_modules/
+**/node_modules/
+
+# Environment variables
+
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build files
+
+.dist/
+build/
+.next/
+out/
+
+# Logs
+
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Coverage
+
+coverage/
+
+# Cache
+
+.cache/
+.parcel-cache/
+.vite/
+
+# OS generated files
+
+.DS_Store
+Thumbs.db
+
+# IDE / Editor
+
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+
+tmp/
+temp/
+
+# Testing
+
+.nyc_output/
+
+# Local databases / data
+
+*.sqlite
+*.sqlite3
+
+# Misc
+
+*.local
+
+# Vercel
+
+.vercel/

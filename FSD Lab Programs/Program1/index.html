@@ -1,0 +1,323 @@
+<!--
+Design a registration form containing:
+1) username
+2) Email
+3) Mobile Number
+4) Password
+5) Confirm Password
+6) Branch selection (dropdown)
+7) upload profile picture
+8) register & reset buttons
+
+write a javascript program that validates:
+1) username must be atleast 6 characters
+2) email must follow correct format 
+3) mobile number must contain exactly 10 digits
+4) password must include letters & numbers
+5) confirm password match
+6) error msg should appear next to each field
+
+after successful validation, display the user details in formatted card using DOM elements
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: white;
+            display: flex;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .container {
+            width: 420px;
+        }
+
+        .form-box, .user-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            text-align: center;
+            color: brown;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+        }
+
+        .error {
+            color: red;
+            font-size: 13px;
+            margin-top: 4px;
+            display: block;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            font-size: 15px;
+        }
+
+        #registerBtn {
+            background: #28a745;
+        }
+
+        #resetBtn {
+            background: #dc3545;
+        }
+
+        .user-card {
+            margin-top: 25px;
+            display: none;
+            text-align: center;
+        }
+
+        .user-card img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #28a745;
+            margin-bottom: 15px;
+        }
+         
+            text-align: left;
+            padding: 5px;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="form-box">
+        <h2>Registration Form</h2>
+
+        <form id="registrationForm">
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username">
+                <span class="error" id="usernameError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" id="email">
+                <span class="error" id="emailError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="mobile">Mobile Number</label>
+                <input type="text" id="mobile">
+                <span class="error" id="mobileError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password">
+                <span class="error" id="passwordError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword">
+                <span class="error" id="confirmPasswordError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="branch">Branch</label>
+                <select id="branch">
+                    <option value="">-- Select Branch --</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Information Science">Information Science</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Mechanical">Mechanical</option>
+                    <option value="Civil">Civil</option>
+                </select>
+                <span class="error" id="branchError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="profilePicture">Profile Picture</label>
+                <input type="file" id="profilePicture" accept="image/*">
+                <span class="error" id="pictureError"></span>
+            </div>
+
+            <div class="buttons">
+                <button type="submit" id="registerBtn">Register</button>
+                <button type="reset" id="resetBtn">Reset</button>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="user-card" id="userCard">
+        <h2>Registration Successful</h2>
+
+        <img id="cardImage" src="" alt="Profile Picture">
+
+        <p><strong>Username:</strong> <span id="cardUsername"></span></p>
+        <p><strong>Email:</strong> <span id="cardEmail"></span></p>
+        <p><strong>Mobile:</strong> <span id="cardMobile"></span></p>
+        <p><strong>Branch:</strong> <span id="cardBranch"></span></p>
+    </div>
+
+</div>
+
+
+<script>
+
+    const form = document.getElementById("registrationForm");
+
+    form.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const username = document.getElementById("username").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const mobile = document.getElementById("mobile").value.trim();
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+        const branch = document.getElementById("branch").value;
+        const picture = document.getElementById("profilePicture").files[0];
+
+        const usernameError = document.getElementById("usernameError");
+        const emailError = document.getElementById("emailError");
+        const mobileError = document.getElementById("mobileError");
+        const passwordError = document.getElementById("passwordError");
+        const confirmPasswordError =
+            document.getElementById("confirmPasswordError");
+        const branchError = document.getElementById("branchError");
+        const pictureError = document.getElementById("pictureError");
+
+        usernameError.textContent = "";
+        emailError.textContent = "";
+        mobileError.textContent = "";
+        passwordError.textContent = "";
+        confirmPasswordError.textContent = "";
+        branchError.textContent = "";
+        pictureError.textContent = "";
+
+        let valid = true;
+
+        if (username.length < 6) {
+            usernameError.textContent =
+                "Username must be at least 6 characters.";
+            valid = false;
+        }
+
+        const emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailPattern.test(email)) {
+            emailError.textContent =
+                "Please enter a valid email address.";
+            valid = false;
+        }
+
+        const mobilePattern = /^\d{10}$/;
+
+        if (!mobilePattern.test(mobile)) {
+            mobileError.textContent =
+                "Mobile number must contain exactly 10 digits.";
+            valid = false;
+        }
+
+        const passwordPattern =
+            /^(?=.*[A-Za-z])(?=.*\d).+$/;
+
+        if (!passwordPattern.test(password)) {
+            passwordError.textContent =
+                "Password must contain both letters and numbers.";
+            valid = false;
+        }
+
+        if (password !== confirmPassword) {
+            confirmPasswordError.textContent =
+                "Passwords do not match.";
+            valid = false;
+        }
+
+        if (branch === "") {
+            branchError.textContent =
+                "Please select a branch.";
+            valid = false;
+        }
+
+        if (!picture) {
+            pictureError.textContent =
+                "Please upload a profile picture.";
+            valid = false;
+        }
+
+        if (!valid) {
+            return;
+        }
+
+        document.getElementById("cardUsername").textContent = username;
+        document.getElementById("cardEmail").textContent = email;
+        document.getElementById("cardMobile").textContent = mobile;
+        document.getElementById("cardBranch").textContent = branch;
+
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            document.getElementById("cardImage").src = e.target.result;
+        };
+
+        reader.readAsDataURL(picture);
+
+        document.getElementById("userCard").style.display = "block";
+    });
+
+
+    form.addEventListener("reset", function() {
+
+        document.querySelectorAll(".error").forEach(function(error) {
+            error.textContent = "";
+        });
+
+        document.getElementById("userCard").style.display = "none";
+    });
+
+</script>
+
+</body>
+</html>

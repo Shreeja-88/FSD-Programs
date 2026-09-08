@@ -1,0 +1,91 @@
+<!--
+a) create an HTML page with a list of items, a few buttons and some paragraphs.
+b) write js for the following:
+	* Change the bg color of an element by its id	
+	* change the txt color of all list(<li>) item to blue 
+	* Change the text of all buttons to "Clicked!" when clicked
+	* Increase the font size of all paragraphs
+	* select the first element with a specific class and change its text.
+	
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DOM Manipulation Example</title>
+
+  <style>
+    #myBox {
+      background-color: yellow;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    li {
+      margin: 5px;
+    }
+
+    button {
+      padding: 10px;
+      margin: 5px;
+    }
+
+    p {
+      color: green;
+    }
+
+    .special {
+      font-weight: bold;
+      color: purple;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="myBox">My Box</div>
+  <ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+    <li>Item 4</li>
+  </ul>
+
+  <button>Button 1</button>
+  <button>Button 2</button>
+
+  <p>Paragraph 1</p>
+  <p>Paragraph 2</p>
+  <p>
+  This is a simple webpage demonstrating DOM manipulation using JavaScript.
+  It contains a list, buttons, and paragraphs that can be modified dynamically.
+</p>
+
+
+  <div class="special">Original Text</div>
+
+  <script>
+    document.getElementById("myBox").style.backgroundColor = "lightblue";
+
+    let items = document.getElementsByTagName("li");
+    for (let item of items) {
+      item.style.color = "blue";
+    }
+
+    let buttons = document.getElementsByTagName("button");
+    for (let btn of buttons) {
+      btn.addEventListener("click", function() {
+        btn.textContent = "Clicked!";
+      });
+    }
+
+    let para = document.getElementsByTagName("p");
+    for (let p of para) {
+      p.style.fontSize = "20px";
+    }
+	
+    document.querySelector(".special").textContent = "Changed Text";
+  </script>
+
+</body>
+</html>

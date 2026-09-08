@@ -1,0 +1,259 @@
+
+body {
+    background-color: lightyellow;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+
+    color: #222222;
+    text-align: left;
+    text-decoration: none;
+    text-transform: none;
+    text-indent: 0;
+    letter-spacing: 1px;
+    word-spacing: 3px;
+    line-height: 1.6;
+
+    margin: 0;
+    padding: 30px;
+}
+
+
+#pageTitle {
+    font-family: Georgia, serif;
+    font-size: 36px;
+    font-weight: bold;
+    font-style: italic;
+
+    color: darkblue;
+
+    text-align: center;
+    text-decoration: underline;
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+    word-spacing: 5px;
+
+    text-shadow: 2px 2px 4px gray;
+}
+
+
+#myBox {
+    background-color: yellow;
+
+    padding: 20px;
+    margin: 20px 0;
+
+    border: 2px solid black;
+    border-radius: 10px;
+
+    font-family: Verdana, sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    font-style: normal;
+
+    color: darkred;
+
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+    word-spacing: 4px;
+}
+
+
+h2 {
+    font-family: Georgia, serif;
+    font-size: 24px;
+    font-weight: bold;
+    font-style: normal;
+
+    color: #8b0000;
+
+    text-align: left;
+    text-decoration: underline;
+    text-transform: capitalize;
+
+    letter-spacing: 1px;
+}
+
+
+li {
+    margin: 8px;
+
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    font-style: normal;
+
+    text-decoration: none;
+    text-transform: capitalize;
+
+    line-height: 1.5;
+}
+
+
+dt {
+    font-family: Georgia, serif;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+
+    color: darkgreen;
+
+    text-decoration: underline;
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+}
+
+
+dd {
+    font-family: Arial, sans-serif;
+    font-size: 17px;
+    font-weight: normal;
+    font-style: normal;
+
+    color: #444444;
+
+    text-align: left;
+    line-height: 1.5;
+}
+
+button {
+    padding: 10px 15px;
+    margin: 5px;
+
+    background-color: lightblue;
+    color: black;
+
+    border: none;
+    border-radius: 6px;
+
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    font-style: normal;
+
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+}
+button:hover {
+    background-color: green;
+}
+
+.p1 {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+
+    color: pink;
+    text-align: left;
+    text-decoration: none;
+    text-transform: none;
+
+    letter-spacing: 1px;
+    word-spacing: 2px;
+    line-height: 1.5;
+}
+
+
+.p2 {
+    font-family: Georgia, serif;
+    font-size: 18px;
+    font-weight: bold;
+    font-style: italic;
+
+    color: red;
+    text-align: center;
+    text-decoration: underline;
+    text-transform: capitalize;
+
+    letter-spacing: 2px;
+    word-spacing: 3px;
+    line-height: 1.6;
+}
+
+
+.p3 {
+    font-family: Verdana, sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+
+    color: lightblue;
+    text-align: left;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+    word-spacing: 4px;
+    line-height: 1.7;
+}
+
+
+.p4 {
+    font-family: "Courier New", monospace;
+    font-size: 22px;
+    font-weight: bold;
+    font-style: italic;
+
+    color: brown;
+    text-align: right;
+    text-decoration: overline;
+    text-transform: none;
+
+    letter-spacing: 2px;
+    word-spacing: 5px;
+    line-height: 1.8;
+}
+
+
+.p5 {
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    font-style: normal;
+
+    color: orange;
+    text-align: center;
+    text-decoration: line-through;
+    text-transform: capitalize;
+
+    letter-spacing: 3px;
+    word-spacing: 6px;
+    line-height: 2;
+
+    text-shadow: 1px 1px 2px gray;
+}
+
+.special {
+    margin-top: 30px;
+    padding: 20px;
+
+    background-color: navy;
+    border: 5px solid yellow;
+
+    font-family: Georgia, serif;
+    font-size: 24px;
+    font-weight: bold;
+    font-style: italic;
+
+    color: white;
+
+    text-align: center;
+    text-decoration: underline;
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+    word-spacing: 4px;
+}
