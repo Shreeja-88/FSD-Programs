@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Password Strength Meter</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {     /*Centres the password card on the screen*/
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+        }
+
+        .container {   /*Password card*/
+            width: 400px;
+            background: rgb(225, 246, 251);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #5a0000;
+        }
+
+        .description {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .password-box {
+            display: flex;
+            gap: 8px;
+        }
+
+        #password {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        #togglePassword {
+            padding: 10px 12px;
+            border: none;
+            border-radius: 8px;
+            background: #eee;
+            cursor: pointer;
+        }
+
+        .strength-container {
+            margin-top: 15px;
+        }
+
+        .strength-bar {
+            width: 100%;
+            height: 10px;
+            background: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        #strength {
+            height: 100%;
+            width: 0%;
+            transition: 0.3s;
+        }
+
+        .strength-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+        }
+
+        #strengthText {
+            font-weight: bold;
+        }
+
+        #score {
+            color: #777;
+        }
+
+        .requirements {
+            margin-top: 25px;
+        }
+
+        .requirements h3 {
+            font-size: 15px;
+            margin-bottom: 12px;
+        }
+
+        .requirement {
+            margin: 8px 0;
+            color: #777;
+        }
+
+        .valid {
+            color: green;
+        }
+
+        .invalid {
+            color: #777;
+        }
+
+        .icon {
+            margin-right: 8px;
+        }
+
+        .tip {
+            margin-top: 20px;
+            padding: 12px;
+            background: #f1f5f9;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2>Password Strength Meter</h2>
+
+        <p class="description">
+            Create a strong and secure password
+        </p>
+
+        <div class="password-box">  <!--Password input field-->
+            <input type="password" id="password" placeholder="***********">
+            <button id="togglePassword">Show</button>
+        </div>
+
+        <!-- Strength Bar -->
+        <div class="strength-container">
+
+            <div class="strength-bar">
+                <div id="strength"></div>
+            </div>
+
+            <div class="strength-info">
+                <span id="strengthText">Enter a password</span>
+                <span id="score">Score: 0/5</span>
+            </div>
+        </div>
+
+
+        <!-- Requirements -->
+        <div class="requirements">
+
+            <h3>Password Requirements</h3>
+
+            <div id="length" class="requirement invalid">
+                <span class="icon">○</span>
+                At least 8 characters
+            </div>
+
+            <div id="uppercase" class="requirement invalid">
+                <span class="icon">○</span>
+                Contains uppercase letter
+            </div>
+
+            <div id="lowercase" class="requirement invalid">
+                <span class="icon">○</span>
+                Contains lowercase letter
+            </div>
+
+            <div id="number" class="requirement invalid">
+                <span class="icon">○</span>
+                Contains a number
+            </div>
+
+            <div id="special" class="requirement invalid">
+                <span class="icon">○</span>
+                Contains special character
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        const password = document.getElementById("password");
+
+        const strength = document.getElementById("strength");
+        const strengthText = document.getElementById("strengthText");
+        const score = document.getElementById("score");
+
+        const lengthCheck = document.getElementById("length");
+        const uppercaseCheck = document.getElementById("uppercase");
+        const lowercaseCheck = document.getElementById("lowercase");
+        const numberCheck = document.getElementById("number");
+        const specialCheck = document.getElementById("special");
+
+        const togglePassword =
+            document.getElementById("togglePassword");
+
+
+        // Update requirement status
+        function updateRequirement(element, condition) {
+
+            if (condition) {
+
+                element.classList.remove("invalid");
+                element.classList.add("valid");
+
+                element.querySelector(".icon").textContent = "✓";
+
+            } else {
+
+                element.classList.remove("valid");
+                element.classList.add("invalid");
+
+                element.querySelector(".icon").textContent = "○";
+            }
+        }
+
+
+        // Check password whenever user types
+        password.addEventListener("input", function () {
+
+            const value = password.value;
+
+            let points = 0;
+
+
+            // Conditions
+            const hasLength = value.length >= 8;
+
+            const hasUppercase = /[A-Z]/.test(value);
+
+            const hasLowercase = /[a-z]/.test(value);
+
+            const hasNumber = /[0-9]/.test(value);
+
+            const hasSpecial = /[^A-Za-z0-9]/.test(value);
+
+
+            // Update requirements
+            updateRequirement(lengthCheck, hasLength);
+
+            updateRequirement(uppercaseCheck, hasUppercase);
+
+            updateRequirement(lowercaseCheck, hasLowercase);
+
+            updateRequirement(numberCheck, hasNumber);
+
+            updateRequirement(specialCheck, hasSpecial);
+
+
+            // Calculate score
+            if (hasLength) points++;
+            if (hasUppercase) points++;
+            if (hasLowercase) points++;
+            if (hasNumber) points++;
+            if (hasSpecial) points++;
+
+
+            // Empty password
+            if (value.length === 0) {
+
+                strength.style.width = "0%";
+
+                strengthText.textContent =
+                    "Enter a password";
+
+                score.textContent =
+                    "Score: 0/5";
+
+                return;
+            }
+
+
+            // Weak condition
+            if (points <= 2) {
+
+                strength.style.width = "33%";
+
+                strength.style.backgroundColor = "red";
+
+                strengthText.textContent = "Weak";
+
+                strengthText.style.color = "red";
+            }
+
+
+            // Medium condition
+            else if (points === 3 || points === 4) {
+
+                strength.style.width = "66%";
+
+                strength.style.backgroundColor = "orange";
+
+                strengthText.textContent = "Medium";
+
+                strengthText.style.color = "orange";
+            }
+
+
+            // Strong condition
+            else {
+
+                strength.style.width = "100%";
+
+                strength.style.backgroundColor = "green";
+
+                strengthText.textContent = "Strong";
+
+                strengthText.style.color = "green";
+            }
+
+
+            score.textContent =
+                "Score: " + points + "/5";
+
+        });
+
+
+        // Show or Hide password option
+        togglePassword.addEventListener("click", function () {
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                togglePassword.textContent = "Hide";
+
+            } else {
+
+                password.type = "password";
+
+                togglePassword.textContent = "Show";
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
