@@ -1,0 +1,69 @@
+<!--develop a js program to implement a simple menu driven calculator using switch and looping statements-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menu Driven Calculator</title>
+</head>
+
+<body>
+
+    <h2>Simple Menu Driven Calculator</h2>
+
+    <script>
+        let choice;
+
+        while (choice != 5) {
+
+            choice = prompt(
+                "MENU\n" +
+                "1. Addition\n" +
+                "2. Subtraction\n" +
+                "3. Multiplication\n" +
+                "4. Division\n" +
+                "5. Exit\n\n" +
+                "Enter your choice:"
+            );
+
+            switch (choice) {
+
+                case "1":
+                    let a1 = Number(prompt("Enter first number:"));
+                    let b1 = Number(prompt("Enter second number:"));
+                    alert("Result = " + (a1 + b1));
+                    break;
+
+                case "2":
+                    let a2 = Number(prompt("Enter first number:"));
+                    let b2 = Number(prompt("Enter second number:"));
+                    alert("Result = " + (a2 - b2));
+                    break;
+
+                case "3":
+                    let a3 = Number(prompt("Enter first number:"));
+                    let b3 = Number(prompt("Enter second number:"));
+                    alert("Result = " + (a3 * b3));
+                    break;
+
+                case "4":
+                    let a4 = Number(prompt("Enter first number:"));
+                    let b4 = Number(prompt("Enter second number:"));
+
+                    if (b4 == 0) {
+                        alert("Cannot divide by zero");
+                    } else {
+                        alert("Result = " + (a4 / b4));
+                    }
+                    break;
+
+                case "5":
+                    alert("Calculator closed.");
+                    break;
+
+                default:
+                    alert("Invalid choice! Please enter 1 to 5.");
+            }
+        }
+    </script>
+
+</body>
+</html>

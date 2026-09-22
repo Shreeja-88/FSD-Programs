@@ -1,0 +1,58 @@
+<!--4b) Write a JS program to create an array of student objects, convert their marks to CGPA using the map method and display a list 
+of students with a CGPA of 9 or higher. also, show the total count of students with CGPA 9 and above using the filter and 
+reduce methods.-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student CGPA</title>
+</head>
+<body>
+
+    <h2>Students with CGPA 9 or Higher</h2>
+
+    <ul id="studentList"></ul>
+
+    <p id="count"></p>
+
+    <script>
+        // Array of student objects
+        let students = [
+            { name: "Rahul", marks: 95 },
+            { name: "Ananya", marks: 88 },
+            { name: "Shreeja", marks: 94 },
+            { name: "Rohan", marks: 75 },
+            { name: "Sneha", marks: 90 }
+        ];
+
+        // Convert marks to CGPA using map()
+        let studentsWithCGPA = students.map(student => {
+            return {
+                name: student.name,
+                cgpa: student.marks / 10
+            };
+        });
+
+        // Filter students with CGPA 9 or above
+        let selectedStudents = studentsWithCGPA.filter(student => student.cgpa >= 9);
+
+        // Display students
+        let list = document.getElementById("studentList");
+
+        selectedStudents.forEach(student => {
+            let li = document.createElement("li");
+            li.textContent = student.name + " - CGPA: " + student.cgpa;
+            list.appendChild(li);
+        });
+
+        // Count students using filter() and reduce()
+        let count = selectedStudents.reduce((total, student) => {
+            return total + 1;
+        }, 0);
+
+        // Display total count
+        document.getElementById("count").textContent =
+            "Total students with CGPA 9 and above: " + count;
+    </script>
+
+</body>
+</html>

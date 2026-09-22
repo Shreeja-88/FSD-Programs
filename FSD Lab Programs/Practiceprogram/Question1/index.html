@@ -1,0 +1,65 @@
+<!--Develop a JS program to implement a student grade calculator using control statements-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Grade Calculator</title>
+</head>
+
+<body>
+
+    <h2>Student Grade Calculator</h2>
+
+    <label>Enter Student Name:</label>
+    <input type="text" id="name">
+    <br><br>
+
+    <label>Enter Marks:</label>
+    <input type="number" id="marks" min="0" max="100">
+    <br><br>
+
+    <button onclick="calculateGrade()">Calculate Grade</button>
+
+    <h3 id="result"></h3>
+
+    <script>
+        function calculateGrade() {
+
+            let name = document.getElementById("name").value;
+            let marks = Number(document.getElementById("marks").value);
+            let grade;
+
+            if (marks < 0 || marks > 100 || isNaN(marks)) {
+                document.getElementById("result").innerHTML =
+                    "Please enter valid marks between 0 and 100.";
+                return;
+            }
+
+            if (marks >= 90) {
+                grade = "A+";
+            }
+            else if (marks >= 80) {
+                grade = "A";
+            }
+            else if (marks >= 70) {
+                grade = "B";
+            }
+            else if (marks >= 60) {
+                grade = "C";
+            }
+            else if (marks >= 50) {
+                grade = "D";
+            }
+            else {
+                grade = "F";
+            }
+
+            document.getElementById("result").innerHTML =
+                "Student Name: " + name + "<br>" +
+                "Marks: " + marks + "<br>" +
+                "Grade: " + grade;
+        }
+    </script>
+
+</body>
+</html>

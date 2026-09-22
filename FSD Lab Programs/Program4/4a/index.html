@@ -1,0 +1,53 @@
+<!--4a) create a JS program where a random number between 1 and 100 is generated and the user is promoted to guess the number. 
+provide feedback on whether the guess is too high, too low, or correct, and allow the user to keep guessing until they get it right. 
+after a correct guess, ask if they want to play again using confirm(); if yes, restart the game, otherwise, display "Thanks for playing!" 
+and end the program.-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Number Guessing Game</title>
+</head>
+<body>
+
+    <h1>Number Guessing Game</h1>
+
+    <script>
+        function playGame() {
+
+            // generate a random number between 1 and 100 
+            let number = Math.floor(Math.random() * 100) + 1;
+            let guess;
+
+            // Keep asking until the user guesses correctly
+            while (true) {
+
+                guess = parseInt(prompt("Guess a number between 1 and 100:"));
+
+                if (guess === number) {
+                    alert("Correct! You guessed the number.");
+                    break;
+                }
+                else if (guess > number) {
+                    alert("Too high! Try again.");
+                }
+                else if (guess < number) {
+                    alert("Too low! Try again.");
+                }
+            }
+
+            // Ask whether the user wants to play again
+            if (confirm("Do you want to play again?")) {
+                playGame();
+            }
+            else {
+                document.write("<h2>Thanks for playing!</h2>");
+            }
+        }
+
+        // Start the game
+        playGame();
+    </script>
+
+</body>
+</html>
