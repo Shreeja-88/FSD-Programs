@@ -1,0 +1,41 @@
+<!--Write a js program that accepts a number from the user and displays: 
+Whether the number is positive, negative or zero.
+whether the number is even or odd.
+its square and cube
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Number Analysis</title>
+</head>
+<body>
+
+    <h2>Number Analysis</h2>
+
+    <script>
+        let num = Number(prompt("Enter a number:"));
+
+        // Positive, Negative or Zero
+        if (num > 0) {
+            document.write("Number is Positive<br>");
+        } else if (num < 0) {
+            document.write("Number is Negative<br>");
+        } else {
+            document.write("Number is Zero<br>");
+        }
+
+        // Even or Odd
+        if (num % 2 === 0) {
+            document.write("Number is Even<br>");
+        } else {
+            document.write("Number is Odd<br>");
+        }
+
+        // Square and Cube
+        document.write("Square = " + (num * num) + "<br>");
+        document.write("Cube = " + (num * num * num) + "<br>");
+    </script>
+
+</body>
+</html>
