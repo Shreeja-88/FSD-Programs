@@ -1,0 +1,82 @@
+<!--Demonstrate all the methods of mounting and updating phase of react class component by changing 
+the city name from "Mysore" to "Bangalore" after 2 seconds and display the same-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>React Lifecycle Methods</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        class City extends React.Component {
+
+            constructor(props) {
+                super(props);
+
+                this.state = {
+                    city: "Mysore"
+                };
+
+                console.log("1. Constructor");
+            }
+
+            static getDerivedStateFromProps(props, state) {
+                console.log("2. getDerivedStateFromProps");
+                return null;
+            }
+
+            componentDidMount() {
+                console.log("3. componentDidMount");
+
+                setTimeout(() => {
+                    this.setState({
+                        city: "Bangalore"
+                    });
+                }, 2000);
+            }
+
+            shouldComponentUpdate(nextProps, nextState) {
+                console.log("4. shouldComponentUpdate");
+                return true;
+            }
+
+            getSnapshotBeforeUpdate(prevProps, prevState) {
+                console.log("5. getSnapshotBeforeUpdate");
+                return null;
+            }
+
+            componentDidUpdate(prevProps, prevState, snapshot) {
+                console.log("6. componentDidUpdate");
+            }
+
+            render() {
+                console.log("Render");
+
+                return (
+                    <h1>
+                        City: {this.state.city}
+                    </h1>
+                );
+            }
+        }
+
+        const root = ReactDOM.createRoot(
+            document.getElementById("root")
+        );
+
+        root.render(<City />);
+
+    </script>
+
+</body>
+</html>

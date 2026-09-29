@@ -1,0 +1,209 @@
+<!--Illustrate react program to implement error boundaries to find
+1) division by zero error 
+2) Array index of out of bound.
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>React Error Boundary</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .box {
+            border: 2px solid #333;
+            padding: 20px;
+            margin: 20px auto;
+            width: 400px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        // Error Boundary Component
+        class ErrorBoundary extends React.Component {
+
+            constructor(props) {
+                super(props);
+
+                this.state = {
+                    hasError: false,
+                    errorMessage: ""
+                };
+            }
+
+            static getDerivedStateFromError(error) {
+                return {
+                    hasError: true,
+                    errorMessage: error.message
+                };
+            }
+
+            componentDidCatch(error, info) {
+                console.log("Error caught:", error);
+                console.log("Error details:", info);
+            }
+
+            render() {
+                if (this.state.hasError) {
+                    return (
+                        <div className="box error">
+                            <h2>Something went wrong!</h2>
+                            <p>{this.state.errorMessage}</p>
+                        </div>
+                    );
+                }
+
+                return this.props.children;
+            }
+        }
+
+
+        // Division by Zero Component
+        class DivisionByZero extends React.Component {
+
+            constructor(props) {
+                super(props);
+
+                this.state = {
+                    calculate: false
+                };
+            }
+
+            handleClick = () => {
+                this.setState({ calculate: true });
+            };
+
+            render() {
+
+                if (this.state.calculate) {
+
+                    // JavaScript normally returns Infinity,
+                    // so we manually throw an error.
+                    let denominator = 0;
+
+                    if (denominator === 0) {
+                        throw new Error("Division by zero is not allowed!");
+                    }
+
+                    return <h3>Result: {10 / denominator}</h3>;
+                }
+
+                return (
+                    <div className="box">
+                        <h2>Division by Zero</h2>
+                        <button onClick={this.handleClick}>
+                            Divide 10 / 0
+                        </button>
+                    </div>
+                );
+            }
+        }
+
+
+        // Array Index Out of Bounds Component
+        class ArrayError extends React.Component {
+
+            constructor(props) {
+                super(props);
+
+                this.state = {
+                    access: false
+                };
+            }
+
+            handleClick = () => {
+                this.setState({ access: true });
+            };
+
+            render() {
+
+                const numbers = [10, 20, 30];
+
+                if (this.state.access) {
+
+                    let index = 5;
+
+                    if (index >= numbers.length) {
+                        throw new Error(
+                            "Array index out of bounds! Index " +
+                            index +
+                            " does not exist."
+                        );
+                    }
+
+                    return <h3>{numbers[index]}</h3>;
+                }
+
+                return (
+                    <div className="box">
+                        <h2>Array Index Out of Bounds</h2>
+                        <p>Array: [10, 20, 30]</p>
+
+                        <button onClick={this.handleClick}>
+                            Access Index 5
+                        </button>
+                    </div>
+                );
+            }
+        }
+
+
+        // Main App
+        class App extends React.Component {
+
+            render() {
+                return (
+                    <div>
+                        <h1>React Error Boundary Demo</h1>
+
+                        <ErrorBoundary>
+                            <DivisionByZero />
+                        </ErrorBoundary>
+
+                        <ErrorBoundary>
+                            <ArrayError />
+                        </ErrorBoundary>
+
+                    </div>
+                );
+            }
+        }
+
+
+        // Render React Application
+        const root = ReactDOM.createRoot(
+            document.getElementById("root")
+        );
+
+        root.render(<App />);
+
+    </script>
+
+</body>
+</html>
