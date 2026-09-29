@@ -1,0 +1,137 @@
+<!--Student information using props:
+1) create a student component that recieves the following information through props:
+name, usn , branch semester display information in a card.
+
+2) create a greeting component that recieves a name through props and displays:
+hello, students 
+Welcome to react programming 
+
+3) create a pw input using state.
+initially display:
+password: ****
+when the user clicks show password, display the actual password
+button should change between :
+show password
+hide password 
+
+give in index.html file -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Props and State</title>
+
+    <!-- React CDN -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            margin: 20px auto;
+            width: 350px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #aaa;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        // 1. Student Component using Props
+        function Student(props) {
+            return (
+                <div className="card">
+                    <h2>Student Information</h2>
+                    <p><b>Name:</b> {props.name}</p>
+                    <p><b>USN:</b> {props.usn}</p>
+                    <p><b>Branch:</b> {props.branch}</p>
+                    <p><b>Semester:</b> {props.semester}</p>
+                </div>
+            );
+        }
+
+        // 2. Greeting Component using Props
+        function Greeting(props) {
+            return (
+                <div className="card">
+                    <h2>Hello, {props.name}</h2>
+                    <p>Welcome to React Programming</p>
+                </div>
+            );
+        }
+
+        // 3. Password Component using State
+        function Password() {
+
+            const [showPassword, setShowPassword] = React.useState(false);
+
+            const password = "mypassword123";
+
+            return (
+                <div className="card">
+                    <h2>Password</h2>
+
+                    <p>
+                        <b>Password:</b>{" "}
+                        {showPassword ? password : "****"}
+                    </p>
+
+                    <button onClick={() => setShowPassword(!showPassword)}>
+                        {showPassword ? "Hide Password" : "Show Password"}
+                    </button>
+                </div>
+            );
+        }
+
+        // Main App Component
+        function App() {
+            return (
+                <div>
+                    <Student
+                        name="Shreeja Hebbar"
+                        usn="4NI24CS001"
+                        branch="Computer Science and Engineering"
+                        semester="5th Semester"
+                    />
+
+                    <Greeting name="Students" />
+
+                    <Password />
+                </div>
+            );
+        }
+
+        // Render App
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        root.render(<App />);
+
+    </script>
+
+</body>
+</html>
